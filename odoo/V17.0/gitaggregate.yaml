@@ -1,0 +1,512 @@
+ingadhoc-account-financial-tools:
+    defaults:
+        depth: 1
+    remotes:
+        origin: https://github.com/ingadhoc/account-financial-tools.git
+    merges:
+        - origin $ODOO_VERSION
+    target: origin $ODOO_VERSION
+
+ingadhoc-account-invoicing:
+    defaults:
+        depth: 1
+    remotes:
+        origin: https://github.com/ingadhoc/account-invoicing.git
+    merges:
+        - origin $ODOO_VERSION
+    target: origin $ODOO_VERSION
+
+ingadhoc-account-payment:
+    defaults:
+        depth: 1
+    remotes:
+        origin: https://github.com/ingadhoc/account-payment.git
+    merges:
+        - origin $ODOO_VERSION
+    target: origin $ODOO_VERSION
+
+ingadhoc-aeroo_reports:
+    defaults:
+        depth: 1
+    remotes:
+        origin: https://github.com/ingadhoc/aeroo_reports.git
+    merges:
+        - origin $ODOO_VERSION
+    target: origin $ODOO_VERSION
+
+ingadhoc-argentina-sale:
+    defaults:
+        depth: 1
+    remotes:
+        origin: https://github.com/ingadhoc/argentina-sale.git
+    merges:
+        - origin $ODOO_VERSION
+    target: origin $ODOO_VERSION
+
+# ingadhoc-delivery:
+#     defaults:
+#         depth: 1
+#     remotes:
+#         origin: https://github.com/ingadhoc/delivery.git
+#     merges:
+#         - origin $ODOO_VERSION
+#     target: origin $ODOO_VERSION
+
+ingadhoc-hr:
+    defaults:
+        depth: 1
+    remotes:
+        origin: https://github.com/ingadhoc/hr.git
+    merges:
+        - origin $ODOO_VERSION
+    target: origin $ODOO_VERSION
+
+ingadhoc-miscellaneous:
+    defaults:
+        depth: 1
+    remotes:
+        origin: https://github.com/ingadhoc/miscellaneous.git
+    merges:
+        - origin $ODOO_VERSION
+    target: origin $ODOO_VERSION
+
+ingadhoc-multi-company:
+    defaults:
+        depth: 1
+    remotes:
+        origin: https://github.com/ingadhoc/multi-company.git
+    merges:
+        - origin $ODOO_VERSION
+    target: origin $ODOO_VERSION
+
+ingadhoc-multi-store:
+    defaults:
+        depth: 1
+    remotes:
+        origin: https://github.com/ingadhoc/multi-store.git
+    merges:
+        - origin $ODOO_VERSION
+    target: origin $ODOO_VERSION
+
+ingadhoc-odoo-argentina:
+    defaults:
+        depth: 1
+    remotes:
+        origin: https://github.com/ingadhoc/odoo-argentina.git
+    merges:
+        - origin $ODOO_VERSION
+    target: origin $ODOO_VERSION
+
+ingadhoc-odoo-argentina-ee:
+    defaults:
+        depth: 1
+    remotes:
+        origin: https://github.com/ingadhoc/odoo-argentina-ee.git
+    merges:
+        - origin $ODOO_VERSION
+    target: origin $ODOO_VERSION
+
+ingadhoc-partner:
+    defaults:
+        depth: 1
+    remotes:
+        origin: https://github.com/ingadhoc/partner.git
+    merges:
+        - origin $ODOO_VERSION
+    target: origin $ODOO_VERSION
+
+ingadhoc-product:
+    defaults:
+        depth: 1
+    remotes:
+        origin: https://github.com/ingadhoc/product.git
+    merges:
+        - origin $ODOO_VERSION
+    target: origin $ODOO_VERSION
+
+ingadhoc-project:
+    defaults:
+        depth: 1
+    remotes:
+        origin: https://github.com/ingadhoc/project.git
+    merges:
+        - origin $ODOO_VERSION
+    target: origin $ODOO_VERSION
+
+ingadhoc-purchase:
+    defaults:
+        depth: 1
+    remotes:
+        origin: https://github.com/ingadhoc/purchase.git
+    merges:
+        - origin $ODOO_VERSION
+    target: origin $ODOO_VERSION
+
+ingadhoc-sale:
+    defaults:
+        depth: 1
+    remotes:
+        origin: https://github.com/ingadhoc/sale.git
+    merges:
+        - origin $ODOO_VERSION
+    target: origin $ODOO_VERSION
+
+ingadhoc-stock:
+    defaults:
+        depth: 1
+    remotes:
+        origin: https://github.com/ingadhoc/stock.git
+    merges:
+        - origin $ODOO_VERSION
+    target: origin $ODOO_VERSION
+
+ingadhoc-website:
+    defaults:
+        depth: 1
+    remotes:
+        origin: https://github.com/ingadhoc/website.git
+    merges:
+        - origin $ODOO_VERSION
+    target: origin $ODOO_VERSION
+
+oca-account-analytic:
+    defaults:
+        depth: 1
+    remotes:
+        origin: https://github.com/oca/account-analytic.git
+    merges:
+        - origin $ODOO_VERSION
+    target: origin $ODOO_VERSION
+
+oca-account-financial-reporting:
+    defaults:
+        depth: 1
+    remotes:
+        origin: https://github.com/oca/account-financial-reporting.git
+    merges:
+        - origin $ODOO_VERSION
+    target: origin $ODOO_VERSION
+
+oca-account-financial-tools:
+    defaults:
+        depth: 1
+    remotes:
+        origin: https://github.com/oca/account-financial-tools.git
+    merges:
+        - origin $ODOO_VERSION
+    target: origin $ODOO_VERSION
+
+oca-account-invoicing:
+    defaults:
+        depth: 1
+    remotes:
+        origin: https://github.com/oca/account-invoicing.git
+    merges:
+        - origin $ODOO_VERSION
+    target: origin $ODOO_VERSION
+
+oca-account-reconcile:
+    defaults:
+        depth: 1
+    remotes:
+        origin: https://github.com/oca/account-reconcile.git
+    merges:
+        - origin $ODOO_VERSION
+    target: origin $ODOO_VERSION
+
+oca-bank-statement-import:
+    defaults:
+        depth: 1
+    remotes:
+        origin: https://github.com/oca/bank-statement-import.git
+    merges:
+        - origin $ODOO_VERSION
+    target: origin $ODOO_VERSION
+
+oca-brand:
+    defaults:
+        depth: 1
+    remotes:
+        origin: https://github.com/oca/brand.git
+    merges:
+        - origin $ODOO_VERSION
+    target: origin $ODOO_VERSION
+
+oca-crm:
+    defaults:
+        depth: 1
+    remotes:
+        origin: https://github.com/oca/crm.git
+    merges:
+        - origin $ODOO_VERSION
+    target: origin $ODOO_VERSION
+
+oca-e-commerce:
+    defaults:
+        depth: 1
+    remotes:
+        origin: https://github.com/oca/e-commerce.git
+    merges:
+        - origin $ODOO_VERSION
+    target: origin $ODOO_VERSION
+
+oca-hr:
+    defaults:
+        depth: 1
+    remotes:
+        origin: https://github.com/oca/hr.git
+    merges:
+        - origin $ODOO_VERSION
+    target: origin $ODOO_VERSION
+
+oca-hr-expense:
+    defaults:
+        depth: 1
+    remotes:
+        origin: https://github.com/oca/hr-expense.git
+    merges:
+        - origin $ODOO_VERSION
+    target: origin $ODOO_VERSION
+
+oca-hr-holidays:
+    defaults:
+        depth: 1
+    remotes:
+        origin: https://github.com/oca/hr-holidays.git
+    merges:
+        - origin $ODOO_VERSION
+    target: origin $ODOO_VERSION
+
+oca-knowledge:
+    defaults:
+        depth: 1
+    remotes:
+        origin: https://github.com/oca/knowledge.git
+    merges:
+        - origin $ODOO_VERSION
+    target: origin $ODOO_VERSION
+
+oca-management-system:
+    defaults:
+        depth: 1
+    remotes:
+        origin: https://github.com/oca/management-system.git
+    merges:
+        - origin $ODOO_VERSION
+    target: origin $ODOO_VERSION
+
+oca-manufacture:
+    defaults:
+        depth: 1
+    remotes:
+        origin: https://github.com/oca/manufacture.git
+    merges:
+        - origin $ODOO_VERSION
+    target: origin $ODOO_VERSION
+
+oca-mis-builder:
+    defaults:
+        depth: 1
+    remotes:
+        origin: https://github.com/oca/mis-builder.git
+    merges:
+        - origin $ODOO_VERSION
+    target: origin $ODOO_VERSION
+
+oca-partner-contact:
+    defaults:
+        depth: 1
+    remotes:
+        origin: https://github.com/oca/partner-contact.git
+    merges:
+        - origin $ODOO_VERSION
+    target: origin $ODOO_VERSION
+
+oca-product-attribute:
+    defaults:
+        depth: 1
+    remotes:
+        origin: https://github.com/oca/product-attribute.git
+    merges:
+        - origin $ODOO_VERSION
+    target: origin $ODOO_VERSION
+
+oca-product-pack:
+    defaults:
+        depth: 1
+    remotes:
+        origin: https://github.com/oca/product-pack.git
+    merges:
+        - origin $ODOO_VERSION
+    target: origin $ODOO_VERSION
+
+oca-project:
+    defaults:
+        depth: 1
+    remotes:
+        origin: https://github.com/oca/project.git
+    merges:
+        - origin $ODOO_VERSION
+    target: origin $ODOO_VERSION
+
+oca-purchase-workflow:
+    defaults:
+        depth: 1
+    remotes:
+        origin: https://github.com/oca/purchase-workflow.git
+    merges:
+        - origin $ODOO_VERSION
+    target: origin $ODOO_VERSION
+
+oca-report-print-send:
+    defaults:
+        depth: 1
+    remotes:
+        origin: https://github.com/oca/report-print-send.git
+    merges:
+        - origin $ODOO_VERSION
+    target: origin $ODOO_VERSION
+
+oca-reporting-engine:
+    defaults:
+        depth: 1
+    remotes:
+        origin: https://github.com/oca/reporting-engine.git
+    merges:
+        - origin $ODOO_VERSION
+    target: origin $ODOO_VERSION
+
+oca-sale-workflow:
+    defaults:
+        depth: 1
+    remotes:
+        origin: https://github.com/oca/sale-workflow.git
+    merges:
+        - origin $ODOO_VERSION
+    target: origin $ODOO_VERSION
+
+oca-server-auth:
+    defaults:
+        depth: 1
+    remotes:
+        origin: https://github.com/oca/server-auth.git
+    merges:
+        - origin $ODOO_VERSION
+    target: origin $ODOO_VERSION
+
+oca-server-backend:
+    defaults:
+        depth: 1
+    remotes:
+        origin: https://github.com/oca/server-backend.git
+    merges:
+        - origin $ODOO_VERSION
+    target: origin $ODOO_VERSION
+
+oca-server-tools:
+    defaults:
+        depth: 1
+    remotes:
+        origin: https://github.com/oca/server-tools.git
+    merges:
+        - origin $ODOO_VERSION
+    target: origin $ODOO_VERSION
+
+oca-server-ux:
+    defaults:
+        depth: 1
+    remotes:
+        origin: https://github.com/oca/server-ux.git
+    merges:
+        - origin $ODOO_VERSION
+    target: origin $ODOO_VERSION
+
+oca-social:
+    defaults:
+        depth: 1
+    remotes:
+        origin: https://github.com/oca/social.git
+    merges:
+        - origin $ODOO_VERSION
+    target: origin $ODOO_VERSION
+
+oca-stock-logistics-availability:
+    defaults:
+        depth: 1
+    remotes:
+        origin: https://github.com/oca/stock-logistics-availability.git
+    merges:
+        - origin $ODOO_VERSION
+    target: origin $ODOO_VERSION
+
+oca-stock-logistics-barcode:
+    defaults:
+        depth: 1
+    remotes:
+        origin: https://github.com/oca/stock-logistics-barcode.git
+    merges:
+        - origin $ODOO_VERSION
+    target: origin $ODOO_VERSION
+
+oca-stock-logistics-request:
+    defaults:
+        depth: 1
+    remotes:
+        origin: https://github.com/oca/stock-logistics-request.git
+    merges:
+        - origin $ODOO_VERSION
+    target: origin $ODOO_VERSION
+
+oca-stock-logistics-warehouse:
+    defaults:
+        depth: 1
+    remotes:
+        origin: https://github.com/oca/stock-logistics-warehouse.git
+    merges:
+        - origin $ODOO_VERSION
+    target: origin $ODOO_VERSION
+
+oca-stock-logistics-workflow:
+    defaults:
+        depth: 1
+    remotes:
+        origin: https://github.com/oca/stock-logistics-workflow.git
+    merges:
+        - origin $ODOO_VERSION
+    target: origin $ODOO_VERSION
+
+oca-survey:
+    defaults:
+        depth: 1
+    remotes:
+        origin: https://github.com/oca/survey.git
+    merges:
+        - origin $ODOO_VERSION
+    target: origin $ODOO_VERSION
+
+oca-web:
+    defaults:
+        depth: 1
+    remotes:
+        origin: https://github.com/oca/web.git
+    merges:
+        - origin $ODOO_VERSION
+    target: origin $ODOO_VERSION
+
+oca-website:
+    defaults:
+        depth: 1
+    remotes:
+        origin: https://github.com/oca/website.git
+    merges:
+        - origin $ODOO_VERSION
+    target: origin $ODOO_VERSION
+
+odoo-design-themes:
+    defaults:
+        depth: 1
+    remotes:
+        origin: https://github.com/odoo/design-themes.git
+    merges:
+        - origin $ODOO_VERSION
+    target: origin $ODOO_VERSION
