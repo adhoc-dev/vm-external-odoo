@@ -1,77 +1,106 @@
 #!/bin/bash
 
 echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections
-apt-get update && apt-get -yqq upgrade && apt-get -yqq dist-upgrade
+apt-get update && apt-get -yqq upgrade && apt-get -yqq dist-upgrade sudo
+
+USER_NAME=$(getent passwd | awk -F: '$3 == 1000 {print $1}')
+if [ -z "$USER_NAME" ]; then
+  USER_NAME=adhoc
+fi
+
+# fix a locale setting warning from Perl
+export LC_CTYPE=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
 
 # Installl common packages
 apt-get install -yqq git python3-pip
-pip install git-aggregator
+pip install git-aggregator --break-system-packages
 
 # Installl docker
 apt-get install -yqq ca-certificates curl
 install -m 0755 -d /etc/apt/keyrings
 curl -fsSL https://download.docker.com/linux/debian/gpg -o /etc/apt/keyrings/docker.asc
 chmod a+r /etc/apt/keyrings/docker.asc
+
+DETECTED_OS=$(. /etc/os-release && echo "$ID")
 # Add the repository to Apt sources:
-echo \
+if [ "$DETECTED_OS" == "ubuntu" ]; then
+  echo \
   "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
   $(. /etc/os-release && echo "${UBUNTU_CODENAME:-$VERSION_CODENAME}") stable" | \
   tee /etc/apt/sources.list.d/docker.list > /dev/null
+else
+  echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/debian $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | tee /etc/apt/sources.list.d/docker.list > /dev/null
+fi
+
+if [ "$DETECTED_OS" == "debian" ]; then
+  if [ -d /usr/sbin ]; then
+    # Add /usr/sbin to PATH if it is not already there
+    if [[ ":$PATH:" != *":/usr/sbin:"* ]]; then
+      export PATH="$PATH:/usr/sbin"
+    fi
+  fi
+fi
+
 apt-get update
 apt-get install -yqq docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 
 # Create user and group
-groupadd docker | true
-useradd -u 1000 -m -s /bin/bash adhoc
-usermod -aG docker adhoc
+groupadd docker || true
+useradd -u 1000 -m -s /bin/bash $USER_NAME || true
+usermod -aG docker $USER_NAME
 # Add user to sudo group
-usermod -aG sudo adhoc
+usermod -aG sudo $USER_NAME
 # sudo without password
-echo "adhoc ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
+echo "$USER_NAME ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 
 # Copy ssh public key
-mkdir -p /home/adhoc/.ssh
-chmod 700 /home/adhoc/.ssh
-chown -R adhoc:adhoc /home/adhoc/.ssh
+mkdir -p /home/$USER_NAME/.ssh
+chmod 700 /home/$USER_NAME/.ssh
+chown -R $USER_NAME:$USER_NAME /home/$USER_NAME/.ssh
 # Copy ssh public key
-cp /root/.ssh/authorized_keys /home/adhoc/.ssh/authorized_keys
-chmod 600 /home/adhoc/.ssh/authorized_keys
-chown adhoc:adhoc /home/adhoc/.ssh/authorized_keys
-# Allow adhoc user to login
-echo "AllowUsers adhoc" >> /etc/ssh/sshd_config
+if [ ! -f /root/.ssh/authorized_keys ]; then
+  echo "No authorized_keys found in /root/.ssh, please add your public key there."
+  exit 1
+fi
+cp /root/.ssh/authorized_keys /home/$USER_NAME/.ssh/authorized_keys
+chmod 600 /home/$USER_NAME/.ssh/authorized_keys
+chown $USER_NAME:$USER_NAME /home/$USER_NAME/.ssh/authorized_keys
+# Allow $USER_NAME user to login
+echo "AllowUsers $USER_NAME" >> /etc/ssh/sshd_config
 
 # SSH Setup
 # Disable password authentication
-sed -i 's/PasswordAuthentication yes/PasswordAuthentication no/' /etc/ssh/sshd_config
+sed -i -E 's/^\s*#?\s*PasswordAuthentication\s+.*/PasswordAuthentication no/' /etc/ssh/sshd_config
 # Disable root login
-sed -i 's/PermitRootLogin yes/PermitRootLogin no/' /etc/ssh/sshd_config
+sed -i -E 's/^\s*#?\s*PermitRootLogin\s+.*/PermitRootLogin no/' /etc/ssh/sshd_config
 # Disable empty passwords
-sed -i 's/PermitEmptyPasswords yes/PermitEmptyPasswords no/' /etc/ssh/sshd_config
+sed -i -E 's/^\s*#?\s*PermitEmptyPasswords\s+.*/PermitEmptyPasswords no/' /etc/ssh/sshd_config
 # Disable X11 forwarding
-sed -i 's/X11Forwarding yes/X11Forwarding no/' /etc/ssh/sshd_config
+sed -i -E 's/^\s*#?\s*PermitX11Forwarding\s+.*/PermitX11Forwarding no/' /etc/ssh/sshd_config
 # Disable TCP forwarding
-sed -i 's/AllowTcpForwarding yes/AllowTcpForwarding no/' /etc/ssh/sshd_config
+sed -i -E 's/^\s*#?\s*AllowTcpForwarding\s+.*/AllowTcpForwarding no/' /etc/ssh/sshd_config
 # Disable agent forwarding
-sed -i 's/AllowAgentForwarding yes/AllowAgentForwarding no/' /etc/ssh/sshd_config
+sed -i -E 's/^\s*#?\s*AllowAgentForwarding\s+.*/AllowAgentForwarding no/' /etc/ssh/sshd_config
 # Disable DNS lookups
-sed -i 's/#UseDNS no/UseDNS no/' /etc/ssh/sshd_config
+sed -i -E 's/^\s*#?\s*UseDNS\s+.*/UseDNS no/' /etc/ssh/sshd_config
 # Disable TCPKeepAlive
-sed -i 's/#TCPKeepAlive yes/TCPKeepAlive no/' /etc/ssh/sshd_config
+sed -i -E 's/^\s*#?\s*TCPKeepAlive\s+.*/TCPKeepAlive no/' /etc/ssh/sshd_config
 # Disable GSSAPIAuthentication
-sed -i 's/#GSSAPIAuthentication yes/GSSAPIAuthentication no/' /etc/ssh/sshd_config
+sed -i -E 's/^\s*#?\s*GSSAPIAuthentication\s+.*/GSSAPIAuthentication no/' /etc/ssh/sshd_config
 # Disable GSSAPIDelegateCredentials
-sed -i 's/#GSSAPIDelegateCredentials yes/GSSAPIDelegateCredentials no/' /etc/ssh/sshd_config
+sed -i -E 's/^\s*#?\s*GSSAPIDelegateCredentials\s+.*/GSSAPIDelegateCredentials no/' /etc/ssh/sshd_config
 # Alow only SSH protocol 2
-sed -i 's/#Protocol 2/Protocol 2/' /etc/ssh/sshd_config
+sed -i -E 's/^\s*#?\s*Protocol\s+.*/Protocol 2/' /etc/ssh/sshd_config
 # Disable SSH v1
-sed -i 's/#HostKey \/etc\/ssh\/ssh_host_rsa_key/HostKey \/etc\/ssh\/ssh_host_rsa_key/' /etc/ssh/sshd_config
+sed -i -E 's/^\s*#?\s*HostKey\s+.*/HostKey \/etc\/ssh\/ssh_host_rsa_key/' /etc/ssh/sshd_config
 
 # Delete root password
 passwd -l root
-ADHOC_HOME="/home/adhoc"
+ADHOC_HOME="/home/$USER_NAME"
 
 # Fail2Ban
-apt-get install -yqq fail2ban
+apt-get install -yqq fail2ban rsyslog
 
 # Odoo login
 cat > /etc/fail2ban/filter.d/odoo.conf <<EOF
@@ -162,16 +191,16 @@ cd $ADHOC_HOME/odoo/odoo/custom-addons
 gitaggregate --jobs $(nproc) -f -c $ADHOC_HOME/odoo/gitaggregate.yaml --expand-env aggregate
 cd -
 
-if awk "BEGIN {exit !($ODOO_VERSION >= 16.0)}"; then
+if ! awk "BEGIN {exit ($ODOO_VERSION >= 16.0)}"; then
   ADDONS_PATHS=$(ls $ADHOC_HOME/odoo/odoo/custom-addons | sed "s|^|/mnt/extra-addons/|" | paste -sd,)",/mnt/enterprise-addons"
   sed -i "s|^addons_path *= *.*|addons_path = $ADDONS_PATHS|" $ADHOC_HOME/odoo/odoo/config/odoo.conf
 fi
 
 # Fix permissions
-chown -R adhoc:adhoc $ADHOC_HOME/odoo
+chown -R $USER_NAME:$USER_NAME $ADHOC_HOME/odoo
 
 # Start Odoo
-su adhoc -c "cd ~/odoo && docker compose up -d"
+su $USER_NAME -c "cd ~/odoo && docker compose up -d"
 
 echo "Odoo setup completed successfully."
 echo "You can access Odoo at https://$CLIENT_DOMAIN"
