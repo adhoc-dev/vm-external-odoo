@@ -145,6 +145,8 @@ mkdir -p $ADHOC_HOME/odoo
 mkdir -p $ADHOC_HOME/odoo/odoo/config
 mkdir -p $ADHOC_HOME/odoo/odoo/custom-addons
 mkdir -p $ADHOC_HOME/odoo/odoo/enterprise
+touch $ADHOC_HOME/odoo/odoo/entrypoint.sh
+chmod +x $ADHOC_HOME/odoo/odoo/entrypoint.sh
 # Create directories for nginx
 mkdir -p $ADHOC_HOME/odoo/html
 mkdir -p $ADHOC_HOME/odoo/vhost.d

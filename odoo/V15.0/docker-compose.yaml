@@ -71,6 +71,7 @@ services:
     volumes:
       - ./data/odoo:/home/odoo/data
       - ./odoo/config/odoo.conf:/home/odoo/.resources/conf.d/99-odoo.conf
+      - ./odoo/entrypoint.sh:/home/odoo/.resources/entrypoint.d/999-entrypoint.sh
       - ./odoo/enterprise:/home/odoo/custom/enterprise
     expose:
       - "8069"
